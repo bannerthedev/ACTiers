@@ -5,6 +5,11 @@ import sys
 from discord import app_commands
 from discord.ext import commands
 from datetime import datetime, timedelta, timezone
+import os 
+import dotenv
+from dotenv import load_dotenv
+
+load_dotenv()
 
 try:
     from zoneinfo import ZoneInfo
@@ -12,8 +17,6 @@ except Exception:
     ZoneInfo = None
 
 # ------------- CONFIG (FILL THESE) -------------
-
-TOKEN = "MTUxNDQzNjI3ODMwODA0NDg3MA.GNHOPS.7kj6fkRF5mLgVQXN3omfEPXydA3-N_RFoczXXU"  # <- replace
 
 # All guild IDs that should have these commands
 GUILD_IDS = [
@@ -1141,4 +1144,4 @@ async def on_ready():
     print(f"Ready: {bot.user}")
 
 
-bot.run(TOKEN)
+bot.run(os.getenv("TOKEN"))
