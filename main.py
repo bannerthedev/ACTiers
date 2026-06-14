@@ -885,10 +885,16 @@ async def start_test(interaction: discord.Interaction, region: app_commands.Choi
     testers = active_testers[guild.id].setdefault(region_key, set())
     testers.add(tester.id)
 
+    # record last testing session time
     last_testing_session[guild.id][region_key] = datetime.now(timezone.utc)
 
-    await interaction.response.send_message(f"Marked {region_key} as started by {tester.mention}.", ephemeral=True)
+    # ack to tester
+    await interaction.response.send_message(
+        f"Marked {region_key} as started by {tester.mention}.",
+        ephemeral=True
+    )
 
+    # message in the channel they used /start in
     online_embed = discord.Embed(
         title="Tester Available",
         description=f"A tester ({tester.mention}) is now available for **{region_key}**.\nPlease follow their instructions.",
@@ -897,6 +903,24 @@ async def start_test(interaction: discord.Interaction, region: app_commands.Choi
     if isinstance(interaction.channel, discord.TextChannel):
         await interaction.channel.send(embed=online_embed)
 
+    # ALSO ping @everyone in the waitroom channel for that region
+    waitroom = await get_waitroom_channel(guild, region_key)
+    if isinstance(waitroom, discord.TextChannel):
+        queue_embed = discord.Embed(
+            title="Tester Available",
+            description=(
+                f"A tester ({tester.mention}) has opened the **{region_key}** queue.\n"
+                f"If you are in this region and want to be tested, join the waitlist panel above."
+            ),
+            color=discord.Color.green()
+        )
+        await waitroom.send(
+            content="@everyone",
+            embed=queue_embed,
+            allowed_mentions=discord.AllowedMentions(everyone=True)
+        )
+
+    # refresh the queue embed for that region
     await update_queue_message(guild, region_key)
 
 
@@ -1127,6 +1151,37 @@ async def leave_queue(interaction: discord.Interaction):
 
     await interaction.response.send_message(
         f"You have been removed from the waitlist queue for: {', '.join(removed_from)}.",
+        ephemeral=True
+    )
+
+
+# ------------- /cooldown -------------
+
+@bot.tree.command(
+    name="cooldown",
+    description="Check how long until you can enter the waitlist again.",
+    guilds=GUILDS
+)
+async def cooldown_cmd(interaction: discord.Interaction):
+    user = interaction.user
+    now = datetime.utcnow()
+
+    # no cooldown or expired
+    if user.id not in cooldowns or cooldowns[user.id] <= now:
+        await interaction.response.send_message(
+            "You have **no active cooldown**. You can enter the waitlist.",
+            ephemeral=True
+        )
+        return
+
+    # active cooldown
+    remaining = cooldowns[user.id] - now
+    days = remaining.days
+    hours = remaining.seconds // 3600
+    mins = (remaining.seconds % 3600) // 60
+
+    await interaction.response.send_message(
+        f"⏳ Time left until you can enter the waitlist again: **{days}d {hours}h {mins}m**.",
         ephemeral=True
     )
 
