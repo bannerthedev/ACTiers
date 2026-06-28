@@ -185,17 +185,17 @@ GUILD_CONFIG: dict[int, dict] = {
         "WAITLIST_CATEGORY_MAP": {
             "NA": 1514489784649646117,
             "EU": 1514489784649646119,
-            "AS": 1514489785039978618
+            "AS": 1514489785039978618,
         },
         "WAITROOM_CHANNEL_MAP": {
             "NA": 1514489784649646118,
             "EU": 1514489785039978617,
-            "AS": 1514489785039978619
+            "AS": 1514489785039978619,
         },
         "WAITLIST_ROLE_MAP": {
             "NA": 1514489779423805495,
             "EU": 1514489779423805494,
-            "AS": 1514489779423805493
+            "AS": 1514489779423805493,
         },
         "RESULTS_CHANNEL_ID": 1514489784381476908,
         "LOGO_EMOJI_ID": 0,
@@ -209,7 +209,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "High Tier 4": 1514489779436130307,
             "Low Tier 4": 1514489779436130306,
             "High Tier 5": 1514489779436130305,
-            "Low Tier 5": 1514489779436130304
+            "Low Tier 5": 1514489779436130304,
         },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Axe PvP Community",
@@ -239,17 +239,17 @@ GUILD_CONFIG: dict[int, dict] = {
         "WAITLIST_CATEGORY_MAP": {
             "NA": 1514488994333982795,
             "EU": 1514488994333982797,
-            "AS": 1514488994333982799
+            "AS": 1514488994333982799,
         },
         "WAITROOM_CHANNEL_MAP": {
             "NA": 1514488994333982796,
             "EU": 1514488994333982798,
-            "AS": 1514488994560479332
+            "AS": 1514488994560479332,
         },
         "WAITLIST_ROLE_MAP": {
             "NA": 1514488993058652213,
             "EU": 1514488993058652212,
-            "AS": 1514488993058652211
+            "AS": 1514488993058652211,
         },
         "RESULTS_CHANNEL_ID": 1514488994195443744,
         "LOGO_EMOJI_ID": 0,
@@ -263,7 +263,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "High Tier 4": 1514488993088147489,
             "Low Tier 4": 1514488993088147488,
             "High Tier 5": 1514488993088147487,
-            "Low Tier 5": 1514488993088147486
+            "Low Tier 5": 1514488993088147486,
         },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] UHC PvP Community",
@@ -293,17 +293,17 @@ GUILD_CONFIG: dict[int, dict] = {
         "WAITLIST_CATEGORY_MAP": {
             "NA": 1514485758445224111,
             "EU": 1514485758445224113,
-            "AS": 1514485758445224115
+            "AS": 1514485758445224115,
         },
         "WAITROOM_CHANNEL_MAP": {
             "NA": 1514485758445224112,
             "EU": 1514485758445224114,
-            "AS": 1514485758566596648
+            "AS": 1514485758566596648,
         },
         "WAITLIST_ROLE_MAP": {
             "NA": 1514485756419113164,
             "EU": 1514485756419113163,
-            "AS": 1514485756419113162
+            "AS": 1514485756419113162,
         },
         "RESULTS_CHANNEL_ID": 1514485758260678799,
         "LOGO_EMOJI_ID": 0,
@@ -317,7 +317,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "High Tier 4": 1514485756469710851,
             "Low Tier 4": 1514485756469710850,
             "High Tier 5": 1514485756469710849,
-            "Low Tier 5": 1514485756469710848
+            "Low Tier 5": 1514485756469710848,
         },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Pot PvP Community",
@@ -347,17 +347,17 @@ GUILD_CONFIG: dict[int, dict] = {
         "WAITLIST_CATEGORY_MAP": {
             "NA": 1514487461215080503,
             "EU": 1514487461215080505,
-            "AS": 1514487461215080507
+            "AS": 1514487461215080507,
         },
         "WAITROOM_CHANNEL_MAP": {
             "NA": 1514487461215080504,
             "EU": 1514487461215080506,
-            "AS": 1514487461336584343
+            "AS": 1514487461336584343,
         },
         "WAITLIST_ROLE_MAP": {
             "NA": 1514487457649791020,
             "EU": 1514487457649791019,
-            "AS": 1514487457649791018
+            "AS": 1514487457649791018,
         },
         "RESULTS_CHANNEL_ID": 1514487461051629670,
         "LOGO_EMOJI_ID": 0,
@@ -371,7 +371,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "High Tier 4": 1514487457666695193,
             "Low Tier 4": 1514487457666695192,
             "High Tier 5": 1514487457666695191,
-            "Low Tier 5": 1514487457666695190
+            "Low Tier 5": 1514487457666695190,
         },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] SMP PvP Community",
@@ -401,17 +401,17 @@ GUILD_CONFIG: dict[int, dict] = {
         "WAITLIST_CATEGORY_MAP": {
             "NA": 1514486530880831553,
             "EU": 1514486530880831555,
-            "AS": 1514486530880831557
+            "AS": 1514486530880831557,
         },
         "WAITROOM_CHANNEL_MAP": {
             "NA": 1514486530880831554,
             "EU": 1514486530880831556,
-            "AS": 1514486531014791258
+            "AS": 1514486531014791258,
         },
         "WAITLIST_ROLE_MAP": {
             "NA": 1514486529978798225,
             "EU": 1514486529978798224,
-            "AS": 1514486529978798223
+            "AS": 1514486529978798223,
         },
         "RESULTS_CHANNEL_ID": 1514486530742292502,
         "LOGO_EMOJI_ID": 0,
@@ -425,7 +425,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "High Tier 4": 1514486529991512068,
             "Low Tier 4": 1514486529991512067,
             "High Tier 5": 1514486529991512066,
-            "Low Tier 5": 1514486529991512065
+            "Low Tier 5": 1514486529991512065,
         },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Vanilla PvP Community",
@@ -451,24 +451,30 @@ GUILD_CONFIG: dict[int, dict] = {
         "HT2_ROLE_ID": 1514487069471150169,
         "LT1_ROLE_ID": 1514487069471150170,
         "HT1_ROLE_ID": 1514487069471150171,
+
         "RANK_ROLE_IDS": set(),
+
         "WAITLIST_CATEGORY_MAP": {
             "NA": 1514487072281460788,
             "EU": 1514487072281460790,
-            "AS": 1514487072281460792
+            "AS": 1514487072281460792,
         },
+
         "WAITROOM_CHANNEL_MAP": {
             "NA": 1514487072281460789,
             "EU": 1514487072281460791,
-            "AS": 1514487072281460793
+            "AS": 1514487072281460793,
         },
+
         "WAITLIST_ROLE_MAP": {
             "NA": 1514487069383200913,
             "EU": 1514487069383200912,
-            "AS": 1514487069383200911
+            "AS": 1514487069383200911,
         },
+
         "RESULTS_CHANNEL_ID": 1514487071526359210,
         "LOGO_EMOJI_ID": 0,
+
         "RANK_NAME_TO_ROLE_ID": {
             "High Tier 1": 1514487069471150171,
             "Low Tier 1": 1514487069471150170,
@@ -479,8 +485,9 @@ GUILD_CONFIG: dict[int, dict] = {
             "High Tier 4": 1514487069471150165,
             "Low Tier 4": 1514487069471150164,
             "High Tier 5": 1514487069471150163,
-            "Low Tier 5": 1514487069471150162
+            "Low Tier 5": 1514487069471150162,
         },
+
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Netherite Pot PvP Community",
             "offline_description": (
@@ -496,7 +503,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "testers_label": "Active Testers:",
         },
     },
-
+            
 COOLDOWN_MONTHS = 1
 
 # ------------- STATE -------------
