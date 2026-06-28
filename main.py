@@ -1055,18 +1055,16 @@ async def start_test(interaction: discord.Interaction, region: app_commands.Choi
     testers = active_testers[guild.id].setdefault(region_key, set())
     testers.add(tester.id)
 
+    # record start time if you want; optional
     last_testing_session[guild.id][region_key] = datetime.now(timezone.utc)
 
-    await interaction.response.send_message(f"Marked {region_key} as started by {tester.mention}.", ephemeral=True)
-
-    online_embed = discord.Embed(
-        title="Tester Available",
-        description=f"A tester ({tester.mention}) is now available for **{region_key}**.\nPlease follow their instructions.",
-        color=discord.Color.green()
+    # ephemeral confirm to the tester
+    await interaction.response.send_message(
+        f"Marked {region_key} as started by {tester.mention}.",
+        ephemeral=True
     )
-    if isinstance(interaction.channel, discord.TextChannel):
-        await interaction.channel.send(embed=online_embed)
 
+    # update the queue embed in the region's waitroom channel
     await update_queue_message(guild, region_key)
 
 
