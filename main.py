@@ -5,7 +5,7 @@ import sys
 from discord import app_commands
 from discord.ext import commands
 from datetime import datetime, timedelta, timezone
-import os 
+import os
 import dotenv
 from dotenv import load_dotenv
 
@@ -17,7 +17,6 @@ except Exception:
     ZoneInfo = None
 
 # ------------- CONFIG (FILL THESE) -------------
-
 # All guild IDs that should have these commands
 GUILD_IDS = [
     1459768915432571135,  # guild 1 (current)
@@ -79,21 +78,20 @@ GUILD_CONFIG: dict[int, dict] = {
         "LOGO_EMOJI_ID": 1514492244697153596,
 
         "RANK_NAME_TO_ROLE_ID": {
-            # "High Tier 5": 1459770467727704209,
-            # "Low Tier 5": 1459770306410315967,
-            # "High Tier 4": 1459770642688905216,
-            # "Low Tier 4": 1459770572203364423,
-            # "High Tier 3": 1459770802458333318,
-            # "Low Tier 3": 1459770716177170453,
-            # "High Tier 2": 1459771049355903088,
-            # "Low Tier 2": 1459770891171794984,
-            # "High Tier 1": 1459771212380111010,
-            # "Low Tier 1": 1459771133179068457,
+            "High Tier 5": 1459770467727704209,
+            "Low Tier 5": 1459770306410315967,
+            "High Tier 4": 1459770642688905216,
+            "Low Tier 4": 1459770572203364423,
+            "High Tier 3": 1459770802458333318,
+            "Low Tier 3": 1459770716177170453,
+            "High Tier 2": 1459771049355903088,
+            "Low Tier 2": 1459770891171794984,
+            "High Tier 1": 1459771212380111010,
+            "Low Tier 1": 1459771133179068457,
         },
 
-        # Per-guild waitroom text
         "WAITROOM_TEXT": {
-            "offline_title": "[1.21+] Sword PvP Community",  # base title (emoji is added automatically if set)
+            "offline_title": "[1.21+] Sword PvP Community",
             "offline_description": (
                 "No Testers Online\n\n"
                 "No testers for your region are available at this time.\n"
@@ -142,19 +140,19 @@ GUILD_CONFIG: dict[int, dict] = {
         },
 
         "RESULTS_CHANNEL_ID": 1514480042682351708,
-        "LOGO_EMOJI_ID": 0,
+        "LOGO_EMOJI_ID": 1514490985156186254,
 
         "RANK_NAME_TO_ROLE_ID": {
-            # "High Tier 5": 1514480039016529921,
-            # "Low Tier 5": 1514480039016529920,
-            # "High Tier 4": 1514480039016529923,
-            # "Low Tier 4": 1514480039016529922,
-            # "High Tier 3": 1514480039016529925,
-            # "Low Tier 3": 1514480039016529924,
-            # "High Tier 2": 1514480039016529927,
-            # "Low Tier 2": 1514480039016529926,
-            # "High Tier 1": 1514480039016529929,
-            # "Low Tier 1": 1514480039016529928,
+            "High Tier 5": 1514480039016529921,
+            "Low Tier 5": 1514480039016529920,
+            "High Tier 4": 1514480039016529923,
+            "Low Tier 4": 1514480039016529922,
+            "High Tier 3": 1514480039016529925,
+            "Low Tier 3": 1514480039016529924,
+            "High Tier 2": 1514480039016529927,
+            "Low Tier 2": 1514480039016529926,
+            "High Tier 1": 1514480039016529929,
+            "Low Tier 1": 1514480039016529928,
         },
 
         "WAITROOM_TEXT": {
@@ -177,12 +175,35 @@ GUILD_CONFIG: dict[int, dict] = {
         "LT1_ROLE_ID": 1514489779436130312,
         "HT1_ROLE_ID": 1514489779436130313,
         "RANK_ROLE_IDS": set(),
-        "WAITLIST_CATEGORY_MAP": {"NA": 1514489784649646117, "EU": 1514489784649646119, "AS": 1514489785039978618},
-        "WAITROOM_CHANNEL_MAP": {"NA": 1514489784649646118, "EU": 1514489785039978617, "AS": 1514489785039978619},
-        "WAITLIST_ROLE_MAP": {"NA": 1514489779423805495, "EU": 1514489779423805494, "AS": 1514489779423805493},
+        "WAITLIST_CATEGORY_MAP": {
+            "NA": 1514489784649646117,
+            "EU": 1514489784649646119,
+            "AS": 1514489785039978618
+        },
+        "WAITROOM_CHANNEL_MAP": {
+            "NA": 1514489784649646118,
+            "EU": 1514489785039978617,
+            "AS": 1514489785039978619
+        },
+        "WAITLIST_ROLE_MAP": {
+            "NA": 1514489779423805495,
+            "EU": 1514489779423805494,
+            "AS": 1514489779423805493
+        },
         "RESULTS_CHANNEL_ID": 1514489784381476908,
-        "LOGO_EMOJI_ID": 0,
-        "RANK_NAME_TO_ROLE_ID": { "High Tier 1": 1514489779436130313, "Low Tier 1": 1514489779436130312, "High Tier 2": 1514489779436130311, "Low Tier 2": 1514489779436130310, "High Tier 3": 1514489779436130309, "Low Tier 3": 1514489779436130308, "High Tier 4": 1514489779436130307, "Low Tier 4": 1514489779436130306, "High Tier 5": 1514489779436130305, "Low Tier 5": 1514489779436130304 },
+        "LOGO_EMOJI_ID": 1514491610425987243,
+        "RANK_NAME_TO_ROLE_ID": {
+            "High Tier 1": 1514489779436130313,
+            "Low Tier 1": 1514489779436130312,
+            "High Tier 2": 1514489779436130311,
+            "Low Tier 2": 1514489779436130310,
+            "High Tier 3": 1514489779436130309,
+            "Low Tier 3": 1514489779436130308,
+            "High Tier 4": 1514489779436130307,
+            "Low Tier 4": 1514489779436130306,
+            "High Tier 5": 1514489779436130305,
+            "Low Tier 5": 1514489779436130304
+        },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Axe PvP Community",
             "offline_description": "No testers are currently online.",
@@ -203,12 +224,35 @@ GUILD_CONFIG: dict[int, dict] = {
         "LT1_ROLE_ID": 1514488993088147494,
         "HT1_ROLE_ID": 1514488993088147495,
         "RANK_ROLE_IDS": set(),
-        "WAITLIST_CATEGORY_MAP": {"NA": 1514488994333982795, "EU": 1514488994333982797, "AS": 1514488994333982799},
-        "WAITROOM_CHANNEL_MAP": {"NA": 1514488994333982796, "EU": 1514488994333982798, "AS": 1514488994560479332},
-        "WAITLIST_ROLE_MAP": {"NA": 1514488993058652213, "EU": 1514488993058652212, "AS": 1514488993058652211},
+        "WAITLIST_CATEGORY_MAP": {
+            "NA": 1514488994333982795,
+            "EU": 1514488994333982797,
+            "AS": 1514488994333982799
+        },
+        "WAITROOM_CHANNEL_MAP": {
+            "NA": 1514488994333982796,
+            "EU": 1514488994333982798,
+            "AS": 1514488994560479332
+        },
+        "WAITLIST_ROLE_MAP": {
+            "NA": 1514488993058652213,
+            "EU": 1514488993058652212,
+            "AS": 1514488993058652211
+        },
         "RESULTS_CHANNEL_ID": 1514488994195443744,
-        "LOGO_EMOJI_ID": 0,
-        "RANK_NAME_TO_ROLE_ID": {"High Tier 1": 1514488993088147495, "Low Tier 1": 1514488993088147494, "High Tier 2": 1514488993088147493, "Low Tier 2": 1514488993088147492, "High Tier 3": 1514488993088147491, "Low Tier 3": 1514488993088147490, "High Tier 4": 1514488993088147489, "Low Tier 4": 1514488993088147488, "High Tier 5": 1514488993088147487, "Low Tier 5": 1514488993088147486},
+        "LOGO_EMOJI_ID": 1514491664784293948,
+        "RANK_NAME_TO_ROLE_ID": {
+            "High Tier 1": 1514488993088147495,
+            "Low Tier 1": 1514488993088147494,
+            "High Tier 2": 1514488993088147493,
+            "Low Tier 2": 1514488993088147492,
+            "High Tier 3": 1514488993088147491,
+            "Low Tier 3": 1514488993088147490,
+            "High Tier 4": 1514488993088147489,
+            "Low Tier 4": 1514488993088147488,
+            "High Tier 5": 1514488993088147487,
+            "Low Tier 5": 1514488993088147486
+        },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] UHC PvP Community",
             "offline_description": "No testers online here.",
@@ -229,12 +273,35 @@ GUILD_CONFIG: dict[int, dict] = {
         "LT1_ROLE_ID": 1514485756469710854,
         "HT1_ROLE_ID": 1514485756469710857,
         "RANK_ROLE_IDS": set(),
-        "WAITLIST_CATEGORY_MAP": {"NA": 1514485758445224111, "EU": 1514485758445224113, "AS": 1514485758445224115},
-        "WAITROOM_CHANNEL_MAP": {"NA": 1514485758445224112, "EU": 1514485758445224114, "AS": 1514485758566596648},
-        "WAITLIST_ROLE_MAP": {"NA": 1514485756419113164, "EU": 1514485756419113163, "AS": 1514485756419113162},
+        "WAITLIST_CATEGORY_MAP": {
+            "NA": 1514485758445224111,
+            "EU": 1514485758445224113,
+            "AS": 1514485758445224115
+        },
+        "WAITROOM_CHANNEL_MAP": {
+            "NA": 1514485758445224112,
+            "EU": 1514485758445224114,
+            "AS": 1514485758566596648
+        },
+        "WAITLIST_ROLE_MAP": {
+            "NA": 1514485756419113164,
+            "EU": 1514485756419113163,
+            "AS": 1514485756419113162
+        },
         "RESULTS_CHANNEL_ID": 1514485758260678799,
-        "LOGO_EMOJI_ID": 0,
-        "RANK_NAME_TO_ROLE_ID": { "High Tier 1": 1514485756469710857, "Low Tier 1": 1514485756469710856, "High Tier 2": 1514485756469710855, "Low Tier 2": 1514485756469710854, "High Tier 3": 1514485756469710853, "Low Tier 3": 1514485756469710852, "High Tier 4": 1514485756469710851, "Low Tier 4": 1514485756469710850, "High Tier 5": 1514485756469710849, "Low Tier 5": 1514485756469710848 },
+        "LOGO_EMOJI_ID": 1514491213825310790,
+        "RANK_NAME_TO_ROLE_ID": {
+            "High Tier 1": 1514485756469710857,
+            "Low Tier 1": 1514485756469710856,
+            "High Tier 2": 1514485756469710855,
+            "Low Tier 2": 1514485756469710854,
+            "High Tier 3": 1514485756469710853,
+            "Low Tier 3": 1514485756469710852,
+            "High Tier 4": 1514485756469710851,
+            "Low Tier 4": 1514485756469710850,
+            "High Tier 5": 1514485756469710849,
+            "Low Tier 5": 1514485756469710848
+        },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Pot PvP Community",
             "offline_description": "No testers available.",
@@ -255,12 +322,35 @@ GUILD_CONFIG: dict[int, dict] = {
         "LT1_ROLE_ID": 1514487457666695198,
         "HT1_ROLE_ID": 1514487457666695199,
         "RANK_ROLE_IDS": set(),
-        "WAITLIST_CATEGORY_MAP": {"NA": 1514487461215080503, "EU": 1514487461215080505, "AS": 1514487461215080507},
-        "WAITROOM_CHANNEL_MAP": {"NA": 1514487461215080504, "EU": 1514487461215080506, "AS": 1514487461336584343},
-        "WAITLIST_ROLE_MAP": {"NA": 1514487457649791020, "EU": 1514487457649791019, "AS": 1514487457649791018},
+        "WAITLIST_CATEGORY_MAP": {
+            "NA": 1514487461215080503,
+            "EU": 1514487461215080505,
+            "AS": 1514487461215080507
+        },
+        "WAITROOM_CHANNEL_MAP": {
+            "NA": 1514487461215080504,
+            "EU": 1514487461215080506,
+            "AS": 1514487461336584343
+        },
+        "WAITLIST_ROLE_MAP": {
+            "NA": 1514487457649791020,
+            "EU": 1514487457649791019,
+            "AS": 1514487457649791018
+        },
         "RESULTS_CHANNEL_ID": 1514487461051629670,
-        "LOGO_EMOJI_ID": 0,
-        "RANK_NAME_TO_ROLE_ID": { "High Tier 1": 1514487457666695199, "Low Tier 1": 1514487457666695198, "High Tier 2": 1514487457666695197, "Low Tier 2": 1514487457666695196, "High Tier 3": 1514487457666695195, "Low Tier 3": 1514487457666695194, "High Tier 4": 1514487457666695193, "Low Tier 4": 1514487457666695192, "High Tier 5": 1514487457666695191, "Low Tier 5": 1514487457666695190 },
+        "LOGO_EMOJI_ID": 1514491521024397422,
+        "RANK_NAME_TO_ROLE_ID": {
+            "High Tier 1": 1514487457666695199,
+            "Low Tier 1": 1514487457666695198,
+            "High Tier 2": 1514487457666695197,
+            "Low Tier 2": 1514487457666695196,
+            "High Tier 3": 1514487457666695195,
+            "Low Tier 3": 1514487457666695194,
+            "High Tier 4": 1514487457666695193,
+            "Low Tier 4": 1514487457666695192,
+            "High Tier 5": 1514487457666695191,
+            "Low Tier 5": 1514487457666695190
+        },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] SMP PvP Community",
             "offline_description": "No testers online.",
@@ -285,7 +375,7 @@ GUILD_CONFIG: dict[int, dict] = {
         "WAITROOM_CHANNEL_MAP": {"NA": 1514486530880831554, "EU": 1514486530880831556, "AS": 1514486531014791258},
         "WAITLIST_ROLE_MAP": {"NA": 1514486529978798225, "EU": 1514486529978798224, "AS": 1514486529978798223},
         "RESULTS_CHANNEL_ID": 1514486530742292502,
-        "LOGO_EMOJI_ID": 0,
+        "LOGO_EMOJI_ID": 1514491416066392145,
         "RANK_NAME_TO_ROLE_ID": { "High Tier 1": 1514486529991512074, "Low Tier 1": 1514486529991512073, "High Tier 2": 1514486529991512072, "Low Tier 2": 1514486529991512071, "High Tier 3": 1514486529991512070, "Low Tier 3": 1514486529991512069, "High Tier 4": 1514486529991512068, "Low Tier 4": 1514486529991512067, "High Tier 5": 1514486529991512066, "Low Tier 5": 1514486529991512065 },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Vanilla PvP Community",
@@ -311,7 +401,7 @@ GUILD_CONFIG: dict[int, dict] = {
         "WAITROOM_CHANNEL_MAP": {"NA": 1514487072281460789, "EU": 1514487072281460791, "AS": 1514487072281460793},
         "WAITLIST_ROLE_MAP": {"NA": 1514487069383200913, "EU": 1514487069383200912, "AS": 1514487069383200911},
         "RESULTS_CHANNEL_ID": 1514487071526359210,
-        "LOGO_EMOJI_ID": 0,
+        "LOGO_EMOJI_ID": 1514491468624957570,
         "RANK_NAME_TO_ROLE_ID": {"High Tier 1": 1514487069471150171, "Low Tier 1": 1514487069471150170, "High Tier 2": 1514487069471150169, "Low Tier 2": 1514487069471150168, "High Tier 3": 1514487069471150167, "Low Tier 3": 1514487069471150166, "High Tier 4": 1514487069471150165, "Low Tier 4": 1514487069471150164, "High Tier 5": 1514487069471150163, "Low Tier 5": 1514487069471150162},
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Netherite Pot PvP Community",
@@ -885,16 +975,10 @@ async def start_test(interaction: discord.Interaction, region: app_commands.Choi
     testers = active_testers[guild.id].setdefault(region_key, set())
     testers.add(tester.id)
 
-    # record last testing session time
     last_testing_session[guild.id][region_key] = datetime.now(timezone.utc)
 
-    # ack to tester
-    await interaction.response.send_message(
-        f"Marked {region_key} as started by {tester.mention}.",
-        ephemeral=True
-    )
+    await interaction.response.send_message(f"Marked {region_key} as started by {tester.mention}.", ephemeral=True)
 
-    # message in the channel they used /start in
     online_embed = discord.Embed(
         title="Tester Available",
         description=f"A tester ({tester.mention}) is now available for **{region_key}**.\nPlease follow their instructions.",
@@ -903,24 +987,6 @@ async def start_test(interaction: discord.Interaction, region: app_commands.Choi
     if isinstance(interaction.channel, discord.TextChannel):
         await interaction.channel.send(embed=online_embed)
 
-    # ALSO ping @everyone in the waitroom channel for that region
-    waitroom = await get_waitroom_channel(guild, region_key)
-    if isinstance(waitroom, discord.TextChannel):
-        queue_embed = discord.Embed(
-            title="Tester Available",
-            description=(
-                f"A tester ({tester.mention}) has opened the **{region_key}** queue.\n"
-                f"If you are in this region and want to be tested, join the waitlist panel above."
-            ),
-            color=discord.Color.green()
-        )
-        await waitroom.send(
-            content="@everyone",
-            embed=queue_embed,
-            allowed_mentions=discord.AllowedMentions(everyone=True)
-        )
-
-    # refresh the queue embed for that region
     await update_queue_message(guild, region_key)
 
 
@@ -1151,37 +1217,6 @@ async def leave_queue(interaction: discord.Interaction):
 
     await interaction.response.send_message(
         f"You have been removed from the waitlist queue for: {', '.join(removed_from)}.",
-        ephemeral=True
-    )
-
-
-# ------------- /cooldown -------------
-
-@bot.tree.command(
-    name="cooldown",
-    description="Check how long until you can enter the waitlist again.",
-    guilds=GUILDS
-)
-async def cooldown_cmd(interaction: discord.Interaction):
-    user = interaction.user
-    now = datetime.utcnow()
-
-    # no cooldown or expired
-    if user.id not in cooldowns or cooldowns[user.id] <= now:
-        await interaction.response.send_message(
-            "You have **no active cooldown**. You can enter the waitlist.",
-            ephemeral=True
-        )
-        return
-
-    # active cooldown
-    remaining = cooldowns[user.id] - now
-    days = remaining.days
-    hours = remaining.seconds // 3600
-    mins = (remaining.seconds % 3600) // 60
-
-    await interaction.response.send_message(
-        f"⏳ Time left until you can enter the waitlist again: **{days}d {hours}h {mins}m**.",
         ephemeral=True
     )
 
