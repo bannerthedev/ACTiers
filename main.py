@@ -11,12 +11,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 try:
     from zoneinfo import ZoneInfo
 except Exception:
     ZoneInfo = None
 
 # ------------- CONFIG (FILL THESE) -------------
+
 # All guild IDs that should have these commands
 GUILD_IDS = [
     1459768915432571135,  # guild 1 (current)
@@ -140,7 +142,7 @@ GUILD_CONFIG: dict[int, dict] = {
         },
 
         "RESULTS_CHANNEL_ID": 1514480042682351708,
-        "LOGO_EMOJI_ID": 1514490985156186254,
+        "LOGO_EMOJI_ID": 0,
 
         "RANK_NAME_TO_ROLE_ID": {
             "High Tier 5": 1514480039016529921,
@@ -157,7 +159,12 @@ GUILD_CONFIG: dict[int, dict] = {
 
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Mace PvP Community",
-            "offline_description": "No testers online in this server right now.",
+            "offline_description": (
+                "No Testers Online\n\n"
+                "No testers for your region are available at this time.\n"
+                "You will be pinged when a tester is available.\n"
+                "Check back later!"
+            ),
             "online_title": "Staff Available!",
             "online_header": "Staff are now available.\n\n",
             "queue_empty_text": "Queue: Empty",
@@ -191,7 +198,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "AS": 1514489779423805493
         },
         "RESULTS_CHANNEL_ID": 1514489784381476908,
-        "LOGO_EMOJI_ID": 1514491610425987243,
+        "LOGO_EMOJI_ID": 0,
         "RANK_NAME_TO_ROLE_ID": {
             "High Tier 1": 1514489779436130313,
             "Low Tier 1": 1514489779436130312,
@@ -206,7 +213,12 @@ GUILD_CONFIG: dict[int, dict] = {
         },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Axe PvP Community",
-            "offline_description": "No testers are currently online.",
+            "offline_description": (
+                "No Testers Online\n\n"
+                "No testers for your region are available at this time.\n"
+                "You will be pinged when a tester is available.\n"
+                "Check back later!"
+            ),
             "online_title": "Tester(s) Available!",
             "online_header": "Tester(s) online.\n\n",
             "queue_empty_text": "Queue: Empty",
@@ -240,7 +252,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "AS": 1514488993058652211
         },
         "RESULTS_CHANNEL_ID": 1514488994195443744,
-        "LOGO_EMOJI_ID": 1514491664784293948,
+        "LOGO_EMOJI_ID": 0,
         "RANK_NAME_TO_ROLE_ID": {
             "High Tier 1": 1514488993088147495,
             "Low Tier 1": 1514488993088147494,
@@ -255,7 +267,12 @@ GUILD_CONFIG: dict[int, dict] = {
         },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] UHC PvP Community",
-            "offline_description": "No testers online here.",
+            "offline_description": (
+                "No Testers Online\n\n"
+                "No testers for your region are available at this time.\n"
+                "You will be pinged when a tester is available.\n"
+                "Check back later!"
+            ),
             "online_title": "Tester(s) Available!",
             "online_header": "Tester(s) online.\n\n",
             "queue_empty_text": "Queue: Empty",
@@ -289,7 +306,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "AS": 1514485756419113162
         },
         "RESULTS_CHANNEL_ID": 1514485758260678799,
-        "LOGO_EMOJI_ID": 1514491213825310790,
+        "LOGO_EMOJI_ID": 0,
         "RANK_NAME_TO_ROLE_ID": {
             "High Tier 1": 1514485756469710857,
             "Low Tier 1": 1514485756469710856,
@@ -304,7 +321,12 @@ GUILD_CONFIG: dict[int, dict] = {
         },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Pot PvP Community",
-            "offline_description": "No testers available.",
+            "offline_description": (
+                "No Testers Online\n\n"
+                "No testers for your region are available at this time.\n"
+                "You will be pinged when a tester is available.\n"
+                "Check back later!"
+            ),
             "online_title": "Tester(s) Available!",
             "online_header": "Tester(s) online.\n\n",
             "queue_empty_text": "Queue: Empty",
@@ -338,7 +360,7 @@ GUILD_CONFIG: dict[int, dict] = {
             "AS": 1514487457649791018
         },
         "RESULTS_CHANNEL_ID": 1514487461051629670,
-        "LOGO_EMOJI_ID": 1514491521024397422,
+        "LOGO_EMOJI_ID": 0,
         "RANK_NAME_TO_ROLE_ID": {
             "High Tier 1": 1514487457666695199,
             "Low Tier 1": 1514487457666695198,
@@ -353,7 +375,12 @@ GUILD_CONFIG: dict[int, dict] = {
         },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] SMP PvP Community",
-            "offline_description": "No testers online.",
+            "offline_description": (
+                "No Testers Online\n\n"
+                "No testers for your region are available at this time.\n"
+                "You will be pinged when a tester is available.\n"
+                "Check back later!"
+            ),
             "online_title": "Tester(s) Available!",
             "online_header": "Tester(s) online.\n\n",
             "queue_empty_text": "Queue: Empty",
@@ -371,15 +398,43 @@ GUILD_CONFIG: dict[int, dict] = {
         "LT1_ROLE_ID": 1514486529991512073,
         "HT1_ROLE_ID": 1514486529991512074,
         "RANK_ROLE_IDS": set(),
-        "WAITLIST_CATEGORY_MAP": {"NA": 1514486530880831553, "EU": 1514486530880831555, "AS": 1514486530880831557},
-        "WAITROOM_CHANNEL_MAP": {"NA": 1514486530880831554, "EU": 1514486530880831556, "AS": 1514486531014791258},
-        "WAITLIST_ROLE_MAP": {"NA": 1514486529978798225, "EU": 1514486529978798224, "AS": 1514486529978798223},
+        "WAITLIST_CATEGORY_MAP": {
+            "NA": 1514486530880831553,
+            "EU": 1514486530880831555,
+            "AS": 1514486530880831557
+        },
+        "WAITROOM_CHANNEL_MAP": {
+            "NA": 1514486530880831554,
+            "EU": 1514486530880831556,
+            "AS": 1514486531014791258
+        },
+        "WAITLIST_ROLE_MAP": {
+            "NA": 1514486529978798225,
+            "EU": 1514486529978798224,
+            "AS": 1514486529978798223
+        },
         "RESULTS_CHANNEL_ID": 1514486530742292502,
-        "LOGO_EMOJI_ID": 1514491416066392145,
-        "RANK_NAME_TO_ROLE_ID": { "High Tier 1": 1514486529991512074, "Low Tier 1": 1514486529991512073, "High Tier 2": 1514486529991512072, "Low Tier 2": 1514486529991512071, "High Tier 3": 1514486529991512070, "Low Tier 3": 1514486529991512069, "High Tier 4": 1514486529991512068, "Low Tier 4": 1514486529991512067, "High Tier 5": 1514486529991512066, "Low Tier 5": 1514486529991512065 },
+        "LOGO_EMOJI_ID": 0,
+        "RANK_NAME_TO_ROLE_ID": {
+            "High Tier 1": 1514486529991512074,
+            "Low Tier 1": 1514486529991512073,
+            "High Tier 2": 1514486529991512072,
+            "Low Tier 2": 1514486529991512071,
+            "High Tier 3": 1514486529991512070,
+            "Low Tier 3": 1514486529991512069,
+            "High Tier 4": 1514486529991512068,
+            "Low Tier 4": 1514486529991512067,
+            "High Tier 5": 1514486529991512066,
+            "Low Tier 5": 1514486529991512065
+        },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Vanilla PvP Community",
-            "offline_description": "No testers online.",
+            "offline_description": (
+                "No Testers Online\n\n"
+                "No testers for your region are available at this time.\n"
+                "You will be pinged when a tester is available.\n"
+                "Check back later!"
+            ),
             "online_title": "Tester(s) Available!",
             "online_header": "Tester(s) online.\n\n",
             "queue_empty_text": "Queue: Empty",
@@ -397,15 +452,43 @@ GUILD_CONFIG: dict[int, dict] = {
         "LT1_ROLE_ID": 1514487069471150170,
         "HT1_ROLE_ID": 1514487069471150171,
         "RANK_ROLE_IDS": set(),
-        "WAITLIST_CATEGORY_MAP": {"NA": 1514487072281460788, "EU": 1514487072281460790, "AS": 1514487072281460792},
-        "WAITROOM_CHANNEL_MAP": {"NA": 1514487072281460789, "EU": 1514487072281460791, "AS": 1514487072281460793},
-        "WAITLIST_ROLE_MAP": {"NA": 1514487069383200913, "EU": 1514487069383200912, "AS": 1514487069383200911},
+        "WAITLIST_CATEGORY_MAP": {
+            "NA": 1514487072281460788,
+            "EU": 1514487072281460790,
+            "AS": 1514487072281460792
+        },
+        "WAITROOM_CHANNEL_MAP": {
+            "NA": 1514487072281460789,
+            "EU": 1514487072281460791,
+            "AS": 1514487072281460793
+        },
+        "WAITLIST_ROLE_MAP": {
+            "NA": 1514487069383200913,
+            "EU": 1514487069383200912,
+            "AS": 1514487069383200911
+        },
         "RESULTS_CHANNEL_ID": 1514487071526359210,
-        "LOGO_EMOJI_ID": 1514491468624957570,
-        "RANK_NAME_TO_ROLE_ID": {"High Tier 1": 1514487069471150171, "Low Tier 1": 1514487069471150170, "High Tier 2": 1514487069471150169, "Low Tier 2": 1514487069471150168, "High Tier 3": 1514487069471150167, "Low Tier 3": 1514487069471150166, "High Tier 4": 1514487069471150165, "Low Tier 4": 1514487069471150164, "High Tier 5": 1514487069471150163, "Low Tier 5": 1514487069471150162},
+        "LOGO_EMOJI_ID": 0,
+        "RANK_NAME_TO_ROLE_ID": {
+            "High Tier 1": 1514487069471150171,
+            "Low Tier 1": 1514487069471150170,
+            "High Tier 2": 1514487069471150169,
+            "Low Tier 2": 1514487069471150168,
+            "High Tier 3": 1514487069471150167,
+            "Low Tier 3": 1514487069471150166,
+            "High Tier 4": 1514487069471150165,
+            "Low Tier 4": 1514487069471150164,
+            "High Tier 5": 1514487069471150163,
+            "Low Tier 5": 1514487069471150162
+        },
         "WAITROOM_TEXT": {
             "offline_title": "[1.21+] Netherite Pot PvP Community",
-            "offline_description": "No testers online.",
+            "offline_description": (
+                "No Testers Online\n\n"
+                "No testers for your region are available at this time.\n"
+                "You will be pinged when a tester is available.\n"
+                "Check back later!"
+            ),
             "online_title": "Tester(s) Available!",
             "online_header": "Tester(s) online.\n\n",
             "queue_empty_text": "Queue: Empty",
@@ -413,7 +496,6 @@ GUILD_CONFIG: dict[int, dict] = {
             "testers_label": "Active Testers:",
         },
     },
-}
 
 COOLDOWN_MONTHS = 1
 
