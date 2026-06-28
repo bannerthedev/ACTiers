@@ -669,15 +669,16 @@ def tester_role_check():
         return any(r.id == tester_role_id for r in interaction.user.roles)
     return app_commands.check(predicate)
 
-# ------------- UI: Accept button -------------
 
-class AcceptView(discord.ui.View):
+# ------------- QUEUE VIEW (Join / Leave buttons) -------------
+
+class RegionQueueView(discord.ui.View):
     def __init__(self, region_key: str):
         super().__init__(timeout=None)
         self.region_key = region_key
 
-    @discord.ui.button(label="Accept", style=discord.ButtonStyle.primary, custom_id="waitroom_accept")
-    async def accept_button(self, interaction: discord.Interaction, button: discord.ui.Button):
+    @discord.ui.button(label="Join Queue", style=discord.ButtonStyle.success, custom_id="queue_join")
+    async def join_queue(self, interaction: discord.Interaction, button: discord.ui.Button):
         user = interaction.user
         guild = interaction.guild
         if guild is None:
@@ -685,43 +686,76 @@ class AcceptView(discord.ui.View):
 
         ensure_guild_structs(guild.id)
         cfg = get_config(guild)
+        region_key = region_key_clean(self.region_key)
 
-        region_key = self.region_key
-
-        role_id = cfg.get("WAITLIST_ROLE_MAP", {}).get(region_key)
-        if role_id:
-            role = guild.get_role(role_id)
-            if role and role not in user.roles:
-                try:
-                    await user.add_roles(role, reason="Entered waitlist via Accept button")
-                except Exception:
-                    pass
-
+        # must have verified
         data = user_submissions.get(user.id)
         if not data:
-            return await interaction.response.send_message("You must **Verify Account** first.", ephemeral=True)
-        ign = data.get("ign", user.display_name)
-        server = data.get("server", "Not specified")
+            return await interaction.response.send_message(
+                "You must **Verify Account** on the main panel before joining the queue.",
+                ephemeral=True
+            )
+
+        # cooldown check
+        now = datetime.utcnow()
+        if user.id in cooldowns and cooldowns[user.id] > now:
+            remaining = cooldowns[user.id] - now
+            days = remaining.days
+            hours = remaining.seconds // 3600
+            mins = (remaining.seconds % 3600) // 60
+            return await interaction.response.send_message(
+                f"⏳ You are still on cooldown for **{days}d {hours}h {mins}m**.",
+                ephemeral=True
+            )
 
         queue = region_queues[guild.id].setdefault(region_key, [])
         if user.id in queue:
             return await interaction.response.send_message("You are already in the queue.", ephemeral=True)
 
+        # add to queue
         queue.append(user.id)
         position = queue.index(user.id) + 1
-        now = datetime.utcnow()
-        cooldowns[user.id] = now + timedelta(days=COOLDOWN_MONTHS * 30)
 
-        ticket_text = ""
-        region_active_testers = active_testers[guild.id].get(region_key, set())
-        if position == 1 and region_active_testers:
-            ticket_channel = await create_ticket_for_user(guild, user, region_key, ign, server)
-            if ticket_channel:
-                ticket_text = f" Your ticket: {ticket_channel.mention}"
+        # apply waitlist role
+        role_id = cfg.get("WAITLIST_ROLE_MAP", {}).get(region_key)
+        if role_id:
+            role = guild.get_role(role_id)
+            if role and role not in user.roles:
+                try:
+                    await user.add_roles(role, reason="Entered waitlist via Join Queue")
+                except Exception:
+                    pass
+
+        # set cooldown start now
+        cooldowns[user.id] = now + timedelta(days=COOLDOWN_MONTHS * 30)
 
         await update_queue_message(guild, region_key)
         await interaction.response.send_message(
-            f"You have been added to the {region_key} waitlist (position #{position}).{ticket_text}",
+            f"You have been added to the **{region_key}** queue at position **#{position}**.",
+            ephemeral=True
+        )
+
+    @discord.ui.button(label="Leave Queue", style=discord.ButtonStyle.danger, custom_id="queue_leave")
+    async def leave_queue_button(self, interaction: discord.Interaction, button: discord.ui.Button):
+        user = interaction.user
+        guild = interaction.guild
+        if guild is None:
+            return await interaction.response.send_message("Guild not found.", ephemeral=True)
+
+        ensure_guild_structs(guild.id)
+        region_key = region_key_clean(self.region_key)
+
+        queue = region_queues[guild.id].setdefault(region_key, [])
+        if user.id not in queue:
+            return await interaction.response.send_message(
+                "You are not currently in this region's queue.",
+                ephemeral=True
+            )
+
+        queue.remove(user.id)
+        await update_queue_message(guild, region_key)
+        await interaction.response.send_message(
+            "You have been removed from the queue.",
             ephemeral=True
         )
 
@@ -752,12 +786,14 @@ async def update_queue_message(guild: discord.Guild, region_key: str):
         "Check back later!"
     )
     online_title = wt.get("online_title", "Tester(s) Available!")
-    online_header = wt.get(
-        "online_header",
+
+    # hard-set the online header text
+    online_header = (
         "Tester(s) Available!\n\n"
-        "⏱️ The queue updates every 1 minute.\n"
-        "Use /leave if you wish to be removed from the waitlist or queue.\n\n"
+        "The queue updates every 1 minute.\n"
+        "If you decide you no longer want to be tested, use `/leave`.\n\n"
     )
+
     queue_empty_text = wt.get("queue_empty_text", "Queue: Empty")
     queue_label = wt.get("queue_label", "Queue:")
     testers_label = wt.get("testers_label", "Active Testers:")
@@ -772,7 +808,7 @@ async def update_queue_message(guild: discord.Guild, region_key: str):
             emoji_text = str(emoji_obj) if emoji_obj else ""
             title = f"{emoji_text} {offline_title_base}" if emoji_text else offline_title_base
 
-            # add Last testing session line
+            # Last testing session line
             last_session_text = format_last_session(guild_id, region_key)
             full_desc = f"{offline_description}\n\n{last_session_text}"
 
@@ -812,6 +848,60 @@ async def update_queue_message(guild: discord.Guild, region_key: str):
                     f"for {region_key} in guild {guild_id}: {e}"
                 )
             return
+
+        # ONLINE: testers available
+        # build queue block (first 17 visible)
+        if not queue:
+            queue_block = queue_empty_text
+        else:
+            visible = queue[:17]
+            lines = []
+            for i, uid in enumerate(visible, start=1):
+                member = guild.get_member(uid)
+                mention = member.mention if member else f"<@{uid}>"
+                lines.append(f"{i}. {mention}")
+            queue_block = f"{queue_label}\n" + "\n".join(lines)
+            if len(queue) > 17:
+                queue_block += f"\n…and **{len(queue) - 17}** more in queue."
+
+        # testers block
+        t_lines = []
+        for i, uid in enumerate(testers, start=1):
+            member = guild.get_member(uid)
+            mention = member.mention if member else f"<@{uid}>"
+            t_lines.append(f"{i}. {mention}")
+        if t_lines:
+            testers_block = f"{testers_label}\n" + "\n".join(t_lines)
+        else:
+            testers_block = f"{testers_label}: None"
+
+        description = f"{online_header}{queue_block}\n\n{testers_block}"
+        embed = discord.Embed(title=online_title, description=description, color=discord.Color.blue())
+        view = RegionQueueView(region_key)
+
+        # delete old stored message
+        old = queue_messages[guild_id].pop(region_key, None)
+        if old:
+            old_ch_id, old_msg_id = old
+            try:
+                old_ch = guild.get_channel(old_ch_id)
+                if isinstance(old_ch, discord.TextChannel):
+                    old_msg = await old_ch.fetch_message(old_msg_id)
+                    await old_msg.delete()
+            except Exception:
+                pass
+
+        # send new queue embed with @everyone
+        try:
+            msg = await waitroom.send(content='@everyone', embed=embed, view=view)
+            queue_messages[guild_id][region_key] = (waitroom.id, msg.id)
+        except Exception as e:
+            print(
+                f"[update_queue_message] failed to send queue message for "
+                f"{region_key} in guild {guild_id}: {e}",
+                file=sys.stderr
+            )
+            traceback.print_exc()
 
     except Exception as e:
         print(
@@ -1055,16 +1145,13 @@ async def start_test(interaction: discord.Interaction, region: app_commands.Choi
     testers = active_testers[guild.id].setdefault(region_key, set())
     testers.add(tester.id)
 
-    # record start time if you want; optional
     last_testing_session[guild.id][region_key] = datetime.now(timezone.utc)
 
-    # ephemeral confirm to the tester
     await interaction.response.send_message(
         f"Marked {region_key} as started by {tester.mention}.",
         ephemeral=True
     )
 
-    # update the queue embed in the region's waitroom channel
     await update_queue_message(guild, region_key)
 
 
